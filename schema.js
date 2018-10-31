@@ -13,7 +13,13 @@ const BookType = new GraphQLObjectType({
     },
     isbn: {
       type: GraphQLString,
-      resolve: xml => xml.isbn[0]
+      resolve: xml => {
+        if (xml.isbn[0].$) {
+          return ''
+        } else {
+          return xml.isbn[0]
+        }
+      }
     },
     description: {
       type: GraphQLString,
